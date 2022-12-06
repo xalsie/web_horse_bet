@@ -10,6 +10,7 @@ http://mars.projectheberg.com:20038/horse
 ## Command to start website :
 
 ```
+$/> npm i
 $/> node ./main.js
 ```
 

@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="fr" data-ng-app="appRoot">
+    <head>
+        <title>Horse Racing Bet</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="language" content="French">
+        <meta name="robots" content="index, follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="Admin intranet power metal GTA 5 RP">
+        <meta name="keywords" content="compta,rp,gta,five,fivem,gta online,gta server">
+        <meta name="author" content="🐻｜LeGrizzly#0341">
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #  Horse Racing Bet
+
+        #  Developed by    : 🐻｜LeGrizzly#0341
+        #  Design by       : 🐻｜LeGrizzly#0341
+
+        #  Support         : https://discord.gg/auRUsS7hVA
+         _                _____          _               _
+        | |              / ____|        (_)             | |
+        | |        ___  | |  __   _ __   _   ____  ____ | |  _   _
+        | |       / _ \ | | |_ | | \__| | | |_  / |_  / | | | | | |
+        | |____  |  __/ | |__| | | |    | |  / /   / /  | | | |_| |
+        |______|  \___|  \_____| |_|    |_| /___| /___| |_|  \__, |
+                                                              __/ |
+                                                             |___/
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~_Update: 07/11/2022_~~-->
+
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
+
+        <!-- Bootstrap core JS -->
+        <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+
+        <!-- MomentJS Script-->
+        <script type="application/javascript" src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+        <script type="application/javascript">moment.locale("fr");</script>
+
+        <!-- AngularJS Core -->
+        <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+        <!-- jQuery JS Core-->
+        <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <!-- jQuery JS UI Core -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <!-- SweetAlert2 -->
+        <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.5/dist/sweetalert2.all.min.js"></script>
+
+        <!-- Bootstrap Table CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+
+        <!-- Bootstrap Table JS -->
+        <script type="application/javascript" src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+
+        <!-- Bootstrap Icons CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+
+        <!-- Bootstrap datepicker JS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js" referrerpolicy="no-referrer" charset="UTF-8"></script>
+
+        <!-- AngularJS Script-->
+        <script type="application/javascript" src="assets/js/app-angular.js"></script>
+
+        <!-- Custom styles for this template-->
+
+        <style>
+            /* .flex-column.p-5 > div {
+                display: none;
+            }
+            .flex-column.p-5 > div.active {
+                display: block !important;
+            }
+            .span.ng-binding {
+                margin: 10px 30px;
+            }
+            .d-inline-flex {
+                display: inline-flex !important;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-around;
+                align-content: center;
+                align-items: center;
+            }
+            .swal2-html-container {
+                overflow: hidden !important;
+            }
+            button.swal2-cancel.btn.btn-secondary,
+            button.swal2-confirm.btn.btn-success,
+            button.btn.btn-primary.btn-xs.btn-edit,
+            button.swal2-confirm.btn.btn-warning {
+                margin-right: 15px;
+            } */
+
+            div.flex-shrink-0.dropdown > a {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 4px;
+            }
+
+            span.podium {
+              margin-right: 15px;
+              font-size: 1.2em;
+            }
+
+            span.podium:first-child {
+              background-color: goldenrod;
+            }
+
+            span.podium:not(first-child ):not(last-child) {
+              background-color: lightslategray;
+            }
+
+            span.podium:last-child {
+              background-color: saddlebrown;
+            }
+        </style>
+    </head>
+
+    <body id="page-top" class="bg-dark">
+        <!-- Page Wrapper -->
+        <div id="wrapper" data-ng-controller="appRacePage">
+
+            <header class="px-3 py-2" style="background-color: #191919;">
+              <div>
+                <div class="container">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-start">
+                    <a href="/horse" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                      <i class="fa-regular fa-horse"></i>
+                      <strong><span class="fs-5 p-2 h6">Horse Racing Bet</span></strong>
+                    </a>
+
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0 dropdown">
+                        <a href="#" class="d-flex link-dark text-decoration-none align-items-center justify-content-center" style="background-color: #656565;" data-bs-toggle="dropdown" aria-expanded="false">
+                          <i class="fa-regular fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow">
+                          <li><a class="dropdown-item" href="#">Profile</a></li>
+                          <li><a class="dropdown-item" href="#">Paramètres</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="logout">Sign out</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </header>
+            <!-- Nav bar START -->
+
+            <!-- Nav bar END -->
+
+            <!-- Content Wrapper -->
+            <div class="container text-white">
+              <div class="row justify-content-between align-items-center pt-3 pb-3">
+                <div class="col-7 text-start">
+                  <div class="backRaceList" style="display: inline-flex;">
+                    <div class="btn btn-light">
+                      <i class="fa-solid fa-chevron-left"></i>
+                    </div>
+
+                    <input type="text" class="form-control-plaintext text-white ps-3" readonly>
+                  </div>
+                </div>
+                <div class="col-2 text-end">
+                  <div class="race_prev">
+                    <div class="btn btn-light">
+                      <i class="fa-solid fa-chevron-left"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="race_next">
+                    <div class="btn btn-light">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            <!-- <div class="flex-column p-5 container-fluid" data-ng-cloak style="overflow: overlay;">
+
+            </div> -->
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <script>
+            $(() => {
+                console.log("init js");
+            })
+        </script>
+
+        <!-- Custom scripts for all pages-->
+
+    </body>
+</html>
