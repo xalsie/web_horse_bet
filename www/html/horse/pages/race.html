@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="fr" data-ng-app="appRoot">
+    <head>
+      <title>Horse Racing Bet</title>
+
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="language" content="French">
+        <meta name="robots" content="index, follow">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+        <meta name="description" content="horse betting in GTA 5 RP">
+        <meta name="keywords" content="horse,bet,betting,rp,gta,five,fivem,gta online,gta server">
+        <meta name="author" content="🐻｜LeGrizzly#0341">
+
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      #  Horse Racing Bet
+
+      #  Developed by    : 🐻｜LeGrizzly#0341
+      #  Design by       : 🐻｜LeGrizzly#0341
+
+      #  Support         : https://discord.gg/auRUsS7hVA
+        _                _____          _               _
+      | |              / ____|        (_)             | |
+      | |        ___  | |  __   _ __   _   ____  ____ | |  _   _
+      | |       / _ \ | | |_ | | \__| | | |_  / |_  / | | | | | |
+      | |____  |  __/ | |__| | | |    | |  / /   / /  | | | |_| |
+      |______|  \___|  \_____| |_|    |_| /___| /___| |_|  \__, |
+                                                            __/ |
+                                                            |___/
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~_Update: 04/01/2023_~~-->
+
+      <!-- Bootstrap core CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="/horse/assets/css/style.css" rel="stylesheet">
+
+      <!-- Bootstrap core JS -->
+      <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+      <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+
+      <!-- MomentJS Script-->
+      <script type="application/javascript" src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+      <script type="application/javascript">moment.locale("fr");</script>
+
+      <!-- AngularJS Core -->
+      <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+      <!-- jQuery JS Core-->
+      <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+      <!-- jQuery JS UI Core -->
+      <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+      <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+      <!-- SweetAlert2 -->
+      <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.5/dist/sweetalert2.all.min.js"></script>
+
+      <!-- Bootstrap Table CSS -->
+      <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+
+      <!-- Bootstrap Table JS -->
+      <script type="application/javascript" src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+
+      <!-- Bootstrap Icons CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+      <!-- Font Awesome CSS -->
+      <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+
+      <!-- Bootstrap datepicker JS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+      <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+      <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js" referrerpolicy="no-referrer" charset="UTF-8"></script>
+
+      <!-- Custom styles for this template-->
+      <script type="application/javascript" src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+
+      <!-- AngularJS Script-->
+      <script type="application/javascript" src="/horse/assets/js/app-angular.js"></script>
+
+      <style>
+        
+      </style>
+    </head>
+
+    <body id="page-top" class="bg-dark modal-backdrop" data-ng-controller="appRacePage">
+      <!-- Page Wrapper -->
+      <div id="wrapper">
+        <header class="px-3 py-2" style="background-color: #191919;">
+          <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+              <a href="/horse" class="d-flex align-items-center text-white text-decoration-none">
+                <i class="fa-regular fa-horse"></i>
+                <strong><span class="fs-5 p-2 h6">Horse Racing Bet</span></strong>
+              </a>
+
+              <div class="d-flex align-items-center">
+                <div class="dropdown">
+                  <a href="#" class="d-flex link-dark text-decoration-none align-items-center justify-content-center avatar-logo" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa-regular fa-user"></i>
+                  </a>
+                  <ul class="dropdown-menu text-small shadow">
+                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li data-ng-if="session.grade>=4"><a class="dropdown-item" href="/horse/raceManagement">Gestion des Courses</a></li>
+                      <li data-ng-if="session.grade>=4"><a class="dropdown-item" href="/horse/userManagement">Gestion des Utilisateurs</a></li>
+                      <li data-ng-if="session.grade>=4"><a class="dropdown-item" href="#">Paramètres</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+      </header>
+        <!-- Nav bar START -->
+
+        <!-- Nav bar END -->
+
+        <!-- Content Wrapper -->
+        <div class="container-fluid body-content text-white padding-footer">
+          <div class="row justify-content-between align-items-center pt-3 pb-3">
+            <div class="col-7 text-start">
+              <div class="backRaceList" style="display: inline-flex;">
+                <div class="btn btn-light" data-ng-click="returnListRace()">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </div>
+
+                <input type="text" class="form-control-plaintext full-date text-white ps-3 text-capitalize fw-semibold" readonly>
+              </div>
+            </div>
+            <div class="col-2 text-end">
+              <div class="race_prev">
+                <div class="btn btn-light">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="race_next">
+                <div class="btn btn-light">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pe-3 ps-3" style="
+            background-image: linear-gradient(70deg, #2E5691 0%, rgba(147, 50, 123, 0.7) 59.37%, #D0692D 100%);
+            margin-left: -12px;
+            margin-right: -12px;
+          ">
+            <div class="row pt-2 pb-4 align-items-start">
+              <div class="col align-self-start text-start">
+                <p>{{detailRace.name}}</p>
+                <p>{{detailRace.type}}</p>
+              </div>
+
+              <div class="col align-self-baseline text-end">
+                <p data-ng-if="detailRace.isEnd=='false'" data-ng-cloak>{{detailRace.time}}</p>
+                <p data-ng-if="detailRace.isEnd=='2'" data-ng-cloak class="fw-bold fst-italic"><i class="fa-sharp fa-solid fa-rotate fa-spin me-2"></i>En cours</p>
+                <p data-ng-if="detailRace.isEnd=='true'" data-ng-cloak class="fw-bold"><i class="fa-solid fa-flag-checkered me-2"></i>Terminée</p>
+              </div>
+            </div>
+            <div class="row pt-4 pb-3 align-items-end text-start">
+              <div class="col align-self-start">
+                <p class="m-0" style="font-size: .875em;">{{detailRace.terrain}} - {{detailRace.extent}} - {{detailRace.starters}} Partants</p>
+              </div>
+
+              <div class="col align-self-end text-end">
+                <span class="text-muted small align-items-end">{{detailRace.id}}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- <hr> -->
+
+          <div class="">
+            <h4 class="pt-2 pb-2">Choisir mon pari<button type="button" class="btn ms-2 text-muted" data-bs-toggle="modal" data-bs-target="#infoBetting">
+              <i class="fa-thin fa-circle-info"></i>
+            </button></h4>
+
+            
+            <hr>
+
+            <div class="row pt-3 pb-3 text-center">
+              <div class="col">
+                <!-- <button class="btn btn-sm btn-success">Gagnant</button> -->
+                <input type="radio" class="btn-check" name="options-outlined" id="btn-radio-gagnant" autocomplete="off" data-ng-checked="true" data-ng-model="typeBet.name" data-ng-init="typeBet.name='gagnant'" value="gagnant" data-ng-disabled="detailRace.isEnd == 'true' || detailRace.isEnd == '2'">
+                <label class="btn btn-outline-success" for="btn-radio-gagnant">Gagnant</label>
+              </div>
+              <div class="col">
+                <!-- <button class="btn btn-sm btn-outline-light">Placé</button> -->
+                <input type="radio" class="btn-check" name="options-outlined" id="btn-radio-place" autocomplete="off" data-ng-model="typeBet.name" value="place" data-ng-disabled="detailRace.isEnd == 'true' || detailRace.isEnd == '2'">
+                <label class="btn btn-outline-success" for="btn-radio-place">Placé</label>
+              </div>
+              <div class="col">
+                <!-- <button class="btn btn-sm btn-outline-light">Quinté</button> -->
+                <input type="radio" class="btn-check" name="options-outlined" id="btn-radio-quinte" autocomplete="off" data-ng-model="typeBet.name" value="quinte" data-ng-disabled="detailRace.isEnd == 'true' || detailRace.isEnd == '2'">
+                <label class="btn btn-outline-success" for="btn-radio-quinte">Quinté</label>
+              </div>
+            </div>
+
+            <hr>
+            <h4 class="pt-2 pb-2">Choisir mes chevaux</h4>
+            <hr>
+
+            <div class="row align-items-center p-2" data-ng-repeat="race in listPartant track by $index" for="checkbox_sel_bet_{{$index}}">
+              <div class="col-2">
+                <p>{{race.numero}}</p>
+              </div>
+              <div class="col-6">
+                <p>{{race.name}}</p>
+              </div>
+              <div class="col-4 align-self-end">
+                <div class="row align-items-center">
+                  <div class="col-12 text-end">
+                    <span class="badge text-bg-warning">{{race.quote}}</span>
+                  </div>
+                  <div class="col-12 text-end pe-3 pt-1">
+                    <input id="checkbox_sel_bet_{{$index}}" data-ng-disabled="detailRace.isEnd == 'true' || detailRace.isEnd == '2'" class="form-check-input mt-0 h3" type="checkbox" value="" aria-label="Checkbox for following text input" data-ng-click="toggleSelection(race.numero)">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <footer class="footer flex-wrap justify-content-between bg-success rounded-top-5 pt-3" data-ng-style="myStyle">
+            <div class="pb-3 pe-4 ps-4">
+              <div class="row text-center align-items-center">
+                <div class="col-4">
+                  <span class="badge bg-dark text-uppercase">{{typeBet.name}}</span>
+                </div>
+                <div class="col align-self-end text-truncate">
+                  <!-- <span data-ng-repeat="partants in selection track by $index" class="text-light">{{partants}}</span> -->
+                  <span data-ng-show="selection.length"><small><strong>{{selection.join(' - ')}}</strong></small></span>
+                  <small data-ng-hide="selection.length">Aucun pari pour le moment</small>
+                </div>
+                <div class="col-2" id="check-bet-open" data-ng-show="selection.length" data-ng-click="toggle_extended_valid_bet()">
+                  <i class="fa-solid fa-caret-up" data-ng-show="extended_valid_bet_up"></i>
+                  <i class="fa-solid fa-caret-down" data-ng-hide="extended_valid_bet_up"></i>
+                </div>
+              </div>
+            </div>
+
+            <div id="linesBetting" class="pe-4 ps-4 bg-dark" style="height: inherit;">
+              <div class="row text-center align-items-center justify-content-between pt-3">
+                <div class="col-4">Mon cash :</div>
+                <div class="col-4">{{session.cash}}</div>
+              </div>
+ 
+              <div class="row text-start align-items-center pt-3" data-ng-repeat="race in selection track by $index">
+                <div class="col-3">
+                  <span class="badge bg-secondary display-4 span_racer_numero" style="font-size: calc(1.375rem + 1.5vw);">{{listPartant[race-1].numero}}</span>
+                </div>
+                <div class="offset-1 col-4">
+                  <input type="number" min="1" max="{{session.cash}}" data-ng-change="calculbet()" data-ng-model="telephones[$index].value" class="form-control input_bet_val" placeholder="1">
+                </div>
+                <div class="col-3 text-end">
+                  <p class="h3 text-light p_quote_val">{{listPartant[race-1].quote}}</p>
+                </div>
+              </div>
+
+              <div class="row text-center align-items-center justify-content-between pt-3">
+                <div class="col-4">Enjeu total :</div>
+                <div class="col-4">$ {{enjeuTotal}}</div>
+              </div>
+              <div class="row text-center align-items-center justify-content-between pt-3">
+                <div class="col-4">Gain total :</div>
+                <div class="col-4">$ {{gainTotal}}</div>
+              </div>
+
+              <div class="row text-center align-items-center pt-3">
+                <div class="col">
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-outline-warning btn-lg" type="button" data-ng-disabled="detailRace.isEnd == 'true' || detailRace.isEnd == '2'" data-ng-click="to_validate_bet(selection)">Validate Betting</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </footer>
+
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="infoBetting" tabindex="-1" aria-labelledby="infoBettingLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="infoBettingLabel">Type de pari</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>- Gagnant - 3 Chevaux gagnant (dans l’ordre)</p>
+              <p>- Placer - 3 Chevaux dans le top (dans le désordre)</p>
+              <p>- Quinté - 5 Chevaux dans le top (dans l’ordre)</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Modal-notification" tabindex="-1" aria-labelledby="modalNotification" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content bg-transparent text-light rounded-5 border-0" style="backdrop-filter: blur(20px);-webkit-backdrop-filter: blur(20px);">
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-9 text-truncate">
+                    <span><small>La course à été mis à jours.</small></span>
+                  </div>
+                  <div class="col-3 position-relative">
+                    <span class="position-absolute top-0 start-50 translate-middle text-muted">
+                      <small>maintenant</small>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- End of Page Wrapper -->
+
+      <script>
+        $(() => {
+            console.log("init js");
+
+            var checkBetOpen = $("#check-bet-open");
+            var checkBetClose = $("#check-bet-close");
+
+            var $fullTextDate = $(".full-date");
+            var $scope = angular.element($fullTextDate).scope();
+
+            try {
+              var [ _timestamp, _idRace ] = window.location.href.split('?')[1].split('&');
+
+              $fullTextDate.val(moment.unix(_timestamp).format("ddd DD MMM"));
+            } catch(e) {
+              window.location = "/horse?"+window.location.href.split('?')[1];
+            }
+        })
+      </script>
+
+        <!-- Custom scripts for all pages-->
+
+    </body>
+</html>

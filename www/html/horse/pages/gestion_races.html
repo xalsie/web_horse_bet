@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="fr" data-ng-app="appRoot">
+    <head>
+        <title>Horse Racing Bet</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="language" content="French">
+        <meta name="robots" content="index, follow">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+        <meta name="description" content="horse betting in GTA 5 RP">
+        <meta name="keywords" content="horse,bet,betting,rp,gta,five,fivem,gta online,gta server">
+        <meta name="author" content="🐻｜LeGrizzly#0341">
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #  Horse Racing Bet
+
+        #  Developed by    : 🐻｜LeGrizzly#0341
+        #  Design by       : 🐻｜LeGrizzly#0341
+
+        #  Support         : https://discord.gg/yM6XJMBBzV
+         _                _____          _               _
+        | |              / ____|        (_)             | |
+        | |        ___  | |  __   _ __   _   ____  ____ | |  _   _
+        | |       / _ \ | | |_ | | \__| | | |_  / |_  / | | | | | |
+        | |____  |  __/ | |__| | | |    | |  / /   / /  | | | |_| |
+        |______|  \___|  \_____| |_|    |_| /___| /___| |_|  \__, |
+                                                              __/ |
+                                                             |___/
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~_Update: 04/01/2023_~~-->
+
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/horse/assets/css/style.css" rel="stylesheet">
+
+        <!-- Bootstrap core JS -->
+        <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+
+        <!-- MomentJS Script-->
+        <script type="application/javascript" src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+        <script type="application/javascript">moment.locale("fr");</script>
+
+        <!-- AngularJS Core -->
+        <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+        <!-- jQuery JS Core-->
+        <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <!-- jQuery JS UI Core -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <!-- SweetAlert2 -->
+        <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.5/dist/sweetalert2.all.min.js"></script>
+
+        <!-- Bootstrap Table CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+
+        <!-- Bootstrap Table JS -->
+        <script type="application/javascript" src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+
+        <!-- Bootstrap Icons CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+
+        <!-- Bootstrap datepicker JS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js" referrerpolicy="no-referrer" charset="UTF-8"></script>
+
+        <!-- Custom styles for this template-->
+        <script type="application/javascript" src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+
+        <!-- AngularJS Script-->
+        <script type="application/javascript" src="/horse/assets/js/app-angular.js"></script>
+
+        <script>
+          // var socket = io();
+
+          // socket.on('announcements', function(data) {
+          //   console.log('Got announcement:', data.message);
+          //   console.log(data);
+          // });
+        </script>
+
+        <style>
+
+        </style>
+    </head>
+
+    <body id="page-top" class="bg-dark">
+        <!-- Page Wrapper -->
+        <div id="wrapper" data-ng-controller="appCommon">
+
+            <header class="px-3 py-2" style="background-color: #191919;">
+                <div class="container">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between">
+                    <a href="/horse" class="d-flex align-items-center text-white text-decoration-none">
+                      <i class="fa-regular fa-horse"></i>
+                      <strong><span class="fs-5 p-2 h6">Horse Racing Bet</span></strong>
+                    </a>
+    
+                    <div class="d-flex align-items-center">
+                      <div class="dropdown">
+                        <a href="#" class="d-flex link-dark text-decoration-none align-items-center justify-content-center avatar-logo" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li data-ng-if="session.grade>=4"><a class="dropdown-item" href="/horse/raceManagement">Gestion des Courses</a></li>
+                            <li data-ng-if="session.grade>=4"><a class="dropdown-item" href="/horse/userManagement">Gestion des Utilisateurs</a></li>
+                            <li data-ng-if="session.grade>=4"><a class="dropdown-item" href="#">Paramètres</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </header>
+            <!-- Nav bar START -->
+
+            <!-- Nav bar END -->
+            <div class="container-fluid mt-5 text-white">
+              <div class="row justify-content-between align-items-baseline pt-3 pb-3">
+                <div class="col mb-2 text-light" data-ng-show="session.grade >= 4">
+                    <div id="toolbar">
+                        <button id="btn-add" class="btn btn-secondary btn-add">➕｜Ajouter une course</button>
+                    </div>
+                    <table class="table table-dark table-sm caption-top table-responsive table-hover text-light position-relative" style="z-index: 1;"
+                        id="table"
+                        data-toolbar="#toolbar"
+                        data-search="true"
+                        data-show-refresh="true"
+                        data-show-columns="true"
+                        data-show-columns-toggle-all="true"
+                        data-show-export="true"
+                        data-minimum-count-columns="2"
+                        data-show-pagination-switch="true"
+                        data-pagination="true"
+                        data-id-field="id"
+
+                        data-page-list="[10, 25, 50, 100, all]"
+                        data-side-pagination="client"
+                        data-url="/horse/raceManagement"
+                        data-method="post"
+                        data-query-params="postQueryParams"
+                        data-content-type="application/x-www-form-urlencoded">
+                        <thead>
+                            <tr>
+                                <th data-field="uuid" data-width="100" data-sortable="true" data-halign="center" data-visible="false">uuid</th>
+
+                                <th data-field="id" data-width="100" data-sortable="true" data-halign="center">Id</th>
+                                <th data-field="name" data-width="100" data-sortable="true" data-halign="center">Name</th>
+                                <th data-field="type" data-width="100" data-sortable="true" data-halign="center">Type</th>
+                                <th data-field="terrain" data-width="100" data-sortable="true" data-halign="center">Terrain</th>
+                                <th data-field="extent" data-width="100" data-sortable="true" data-halign="center">extent</th>
+                                <th data-field="date" data-width="100" data-sortable="true" data-halign="center" data-formatter="timestampToDate">Date</th>
+                                <th data-field="time" data-width="100" data-sortable="true" data-halign="center">Time</th>
+                                <th data-field="isEnd" data-width="70" data-sortable="true" data-halign="center" data-formatter="toCheckbox">End</th>
+
+                                <th data-field="starters" data-width="100" data-sortable="true" data-halign="center" data-visible="false">Starters</th>
+                                <th data-field="img" data-width="100" data-sortable="true" data-halign="center" data-visible="false">Image</th>
+
+                                <th data-field="action" data-width="150" data-halign="center" data-align="center" data-formatter="actionFormatter" data-events="actionEvents">Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- ############################ -->
+            <!-- ## START MODAL -->
+            <div class="modal fade" id="modalRace--add" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalAddStatutRace" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAddStatutRaceLabel">Modifier les details de la course</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-xmark-large"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form onsubmit="toRaceAdd()">
+                                <div class="container mb-3 mt-2">
+                                    <div class="row">
+                                        <div class="col align-self-center">
+                                            <div class="row g-3">
+                                                <div class="form-floating col-sm-6">
+                                                    <input type="text" class="form-control" id="modalRace--add-id" placeholder="Id" required>
+                                                    <label for="modalRace--add-id">Id</label>
+                                                  </div>
+                                                <div class="form-floating col-sm-6">
+                                                  <input type="text" class="form-control" id="modalRace--add-name" placeholder="Name" required>
+                                                  <label for="modalRace--add-name">Name</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-4">
+                                                  <input type="text" class="form-control" id="modalRace--add-type" placeholder="Type" required>
+                                                  <label for="modalRace--add-type">Type</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-4">
+                                                    <input type="text" class="form-control" id="modalRace--add-extent" placeholder="Extent" required>
+                                                    <label for="modalRace--add-extent">Extent</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-4">
+                                                    <input type="text" class="form-control" id="modalRace--add-terrain" placeholder="Terrain" required>
+                                                    <label for="modalRace--add-terrain">Terrain</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-6">
+                                                    <input type="date" class="form-control" id="modalRace--add-date" placeholder="Date" required>
+                                                    <label for="modalRace--add-date">Date</label>
+                                                </div>
+                                                
+                                                <div class="form-floating col-sm-6">
+                                                    <input type="time" class="form-control" id="modalRace--add-time" placeholder="Time" required>
+                                                    <label for="modalRace--add-time">Time</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3 mb-3">
+                                        <div class="col align-self-center">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="modalRace--add-radio--1" value="1">
+                                                <label class="form-check-label" for="modalRace--add-radio--1">Pas commencé ❌</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="modalRace--add-radio--2" value="2">
+                                                <label class="form-check-label" for="modalRace--add-radio--2">En cours <i class="fa-sharp fa-solid fa-rotate fa-spin me-2"></i></label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="modalRace--add-radio--3" value="3">
+                                                <label class="form-check-label" for="modalRace--add-radio--3">Terminé ✔️</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                                    <button type="submit" class="btn btn-block btn-primary">Enregistrer !</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalRace--edit" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalEditStatutRace" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalEditStatutRaceLabel">Modifier les details de la course</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-xmark-large"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form onsubmit="toRaceEdit()">
+                                <div class="container mb-3 mt-2">
+                                    <div class="row">
+                                        <div class="col align-self-center">
+                                            <div class="action" style="display: none;">
+                                                <input type="text" name="formControlId" class="formControlId" disabled>
+                                            </div>
+
+                                            <div class="row g-3">
+                                                <div class="form-floating col-sm-12">
+                                                  <input type="text" class="form-control" id="modalRace--edit-name" placeholder="Name" required>
+                                                  <label for="modalRace--edit-name">Name</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-4">
+                                                  <input type="text" class="form-control" id="modalRace--edit-type" placeholder="Type" required>
+                                                  <label for="modalRace--edit-type">Type</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-4">
+                                                    <input type="text" class="form-control" id="modalRace--edit-extent" placeholder="Extent" required>
+                                                    <label for="modalRace--edit-extent">Extent</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-4">
+                                                    <input type="text" class="form-control" id="modalRace--edit-terrain" placeholder="Terrain" required>
+                                                    <label for="modalRace--edit-terrain">Terrain</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-6">
+                                                    <input type="date" class="form-control" id="modalRace--edit-date" placeholder="Date" required>
+                                                    <label for="modalRace--edit-date">Date</label>
+                                                </div>
+                                                
+                                                <div class="form-floating col-sm-6">
+                                                    <input type="time" class="form-control" id="modalRace--edit-time" placeholder="Time" required>
+                                                    <label for="modalRace--edit-time">Time</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3 mb-3">
+                                        <div class="col align-self-center">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="modalRace--edit-radio--1" value="1">
+                                                <label class="form-check-label" for="modalRace--edit-radio--1">Pas commencé ❌</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="modalRace--edit-radio--2" value="2">
+                                                <label class="form-check-label" for="modalRace--edit-radio--2">En cours <i class="fa-sharp fa-solid fa-rotate fa-spin me-2"></i></label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="modalRace--edit-radio--3" value="3">
+                                                <label class="form-check-label" for="modalRace--edit-radio--3">Terminé ✔️</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer justify-content-center">
+                                    <div class="form-floating col-sm-5">
+                                        <input type="text" class="form-control" id="modalRace--edit-id" placeholder="Id" required disabled>
+                                        <label for="modalRace--edit-id">Id</label>
+                                    </div>
+                                    <div class="form-floating col-sm-5">
+                                        <input type="text" class="form-control" id="modalRace--edit-footer-name" placeholder="Name" required disabled>
+                                        <label for="modalRace--edit-footer-name">Name</label>
+                                    </div>
+
+                                    <div class="form-floating col-sm-5">
+                                        <input type="date" class="form-control" id="modalRace--edit-footer-date" placeholder="Date" required disabled>
+                                        <label for="modalRace--edit-footer-date">Date</label>
+                                    </div>
+                                    <div class="form-floating col-sm-5">
+                                        <input type="time" class="form-control" id="modalRace--edit-footer-time" placeholder="Time" required disabled>
+                                        <label for="modalRace--edit-footer-time">Time</label>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                                    <button type="submit" class="btn btn-block btn-primary">Enregistrer !</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalRace--edit-runner" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalEditRunnerRace" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalEditRace--runner--Label">Modifier le statut de la course</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-xmark-large"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form onsubmit="eeeeee()">
+                                <div class="container text-center mb-3 mt-2">
+                                    <div class="row">
+                                        <div class="col colOfRunner align-self-center">
+                                            <div class="action" style="display: none;">
+                                                <input type="text" name="formControlId" class="formControlId" disabled>
+                                            </div>
+                                            
+                                            <div class="row g-3 pb-2 pt-1 rowOfRunner" id="rowOfRunnerTemplate" style="display: none;">
+                                                <div class="form-floating col-sm-3">
+                                                    <input type="text" class="form-control modalRace--edit-runner-numero" id="" placeholder="Numero" required>
+                                                    <label for="modalRace--edit-runner-name">Numero</label>
+                                                </div>
+                                                <div class="form-floating col-sm-3">
+                                                    <input type="text" class="form-control modalRace--edit-runner-name" id="" placeholder="Name" required>
+                                                    <label for="modalRace--edit-runner-name">Name</label>
+                                                </div>
+                                                <div class="form-floating col-sm-3">
+                                                    <input type="text" class="form-control modalRace--edit-runner-quote" id="" placeholder="Quote" required>
+                                                    <label for="modalRace--edit-runner-name">Quote</label>
+                                                </div>
+                                                <div class="form-floating col-sm-3">
+                                                    <input type="text" class="form-control modalRace--edit-runner-position" id="" placeholder="Position" required>
+                                                    <label for="modalRace--edit-runner-name">Position</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="btnAddRunner()">➕｜Ajouter un Runner</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer justify-content-center">
+                                    <div class="form-floating col-sm-5">
+                                        <input type="text" class="form-control" id="modalRace--edit-runner-footer-id" placeholder="Id" required disabled>
+                                        <label for="modalRace--edit-runner-footer-id">Id</label>
+                                    </div>
+                                    <div class="form-floating col-sm-5">
+                                        <input type="text" class="form-control" id="modalRace--edit-runner-footer-name" placeholder="Name" required disabled>
+                                        <label for="modalRace--edit-runner-footer-name">Name</label>
+                                    </div>
+
+                                    <div class="form-floating col-sm-5">
+                                        <input type="date" class="form-control" id="modalRace--edit-runner-footer-date" placeholder="Date" required disabled>
+                                        <label for="modalRace--edit-runner-footer-date">Date</label>
+                                    </div>
+                                    <div class="form-floating col-sm-5">
+                                        <input type="time" class="form-control" id="modalRace--edit-runner-footer-time" placeholder="Time" required disabled>
+                                        <label for="modalRace--edit-runner-footer-time">Time</label>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                                    <button type="submit" class="btn btn-block btn-primary">Enregistrer !</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalRace--edit-statut" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalEditStatutRace" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalEditRace--Statut--Label">Modifier le statut de la course</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-xmark-large"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form onsubmit="toRaceEditStatut()">
+                                <div class="container text-center mb-3 mt-2">
+                                    <div class="row">
+                                        <div class="col align-self-center">
+                                            <div class="action" style="display: none;">
+                                                <input type="text" name="formControlId" class="formControlId" disabled>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="modalRace--edit-statut-radio--1" value="1">
+                                                <label class="form-check-label" for="modalRace--edit-statut-radio--1">Pas commencé ❌</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="modalRace--edit-statut-radio--2" value="2">
+                                                <label class="form-check-label" for="modalRace--edit-statut-radio--2">En cours <i class="fa-sharp fa-solid fa-rotate fa-spin me-2"></i></label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="modalRace--edit-statut-radio--3" value="3">
+                                                <label class="form-check-label" for="modalRace--edit-statut-radio--3">Terminé ✔️</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer justify-content-center">
+                                    <div class="form-floating col-sm-5">
+                                        <input type="text" class="form-control" id="modalRace--edit-statut-id" placeholder="Id" required disabled>
+                                        <label for="modalRace--edit-statut-id">Id</label>
+                                    </div>
+                                    <div class="form-floating col-sm-5">
+                                        <input type="text" class="form-control" id="modalRace--edit-statut-name" placeholder="Name" required disabled>
+                                        <label for="modalRace--edit-statut-name">Name</label>
+                                    </div>
+
+                                    <div class="form-floating col-sm-5">
+                                        <input type="date" class="form-control" id="modalRace--edit-statut-date" placeholder="Date" required disabled>
+                                        <label for="modalRace--edit-statut-date">Date</label>
+                                    </div>
+                                    <div class="form-floating col-sm-5">
+                                        <input type="time" class="form-control" id="modalRace--edit-statut-time" placeholder="Time" required disabled>
+                                        <label for="modalRace--edit-statut-time">Time</label>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                                    <button type="submit" class="btn btn-block btn-success">Enregistrer !</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalRace--delete" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalDeleteStatutRace" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalDeleteStatutRaceLabel">Supprimer la course</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-xmark-large"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form onsubmit="toRaceDelete()">
+                                <div class="container mb-3 mt-2">
+                                    <div class="row">
+                                        <div class="col align-self-center">
+                                            <div class="action" style="display: none;">
+                                                <input type="text" name="formControlId" class="formControlId" disabled>
+                                            </div>
+
+                                            <div class="row g-3">
+                                                <div class="form-floating col-sm-6">
+                                                    <input type="text" class="form-control" id="modalRace--delete-id" placeholder="Id" required disabled>
+                                                    <label for="modalRace--delete-id">Id</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-6">
+                                                    <input type="text" class="form-control" id="modalRace--delete-name" placeholder="Name" required disabled>
+                                                    <label for="modalRace--delete-name">Name</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-4">
+                                                    <input type="text" class="form-control" id="modalRace--delete-type" placeholder="Type" required disabled>
+                                                    <label for="modalRace--delete-type">Type</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-4">
+                                                    <input type="text" class="form-control" id="modalRace--delete-extent" placeholder="Extent" required disabled>
+                                                    <label for="modalRace--delete-extent">Extent</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-4">
+                                                    <input type="text" class="form-control" id="modalRace--delete-terrain" placeholder="Terrain" required disabled>
+                                                    <label for="modalRace--delete-terrain">Terrain</label>
+                                                </div>
+
+                                                <div class="form-floating col-sm-6">
+                                                    <input type="date" class="form-control" id="modalRace--delete-date" placeholder="Date" required disabled>
+                                                    <label for="modalRace--delete-date">Date</label>
+                                                </div>
+                                                
+                                                <div class="form-floating col-sm-6">
+                                                    <input type="time" class="form-control" id="modalRace--delete-time" placeholder="Time" required disabled>
+                                                    <label for="modalRace--delete-time">Time</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                                    <button type="submit" class="btn btn-block btn-danger">Supprimer !</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ## END MODAL -->
+            <!-- ############################ -->
+            <!-- Content Wrapper -->
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <script>
+            $(() => {
+                console.log("init js")
+                const $table = $('#table')
+
+                $table.bootstrapTable('destroy').bootstrapTable({
+                    locale: "fr-FR"
+                })
+            })
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            $("#btn-add").click(() => {
+                const modal = $('#modalRace--add')
+                    modal.modal('show')
+                    
+            })
+
+            $('#table').on('click-row.bs.table', function (e, row, element, field) {
+                if (field == "isEnd") {
+                    var modal = $('#modalRace--edit-statut')
+                        modal.modal('show')
+                        modal.find(".formControlId").val(row["id"])
+
+                        modal.find("#modalRace--edit-statut-id").val(row["id"])
+                        modal.find("#modalRace--edit-statut-name").val(row["name"])
+                        modal.find("#modalRace--edit-statut-date").val(moment.unix(row["date"]).format("YYYY-MM-DD"))
+                        modal.find("#modalRace--edit-statut-time").val(moment(row["time"], 'HH:mm').format("HH:mm"))
+
+                    switch (row[field]) {
+                        case "true":
+                            modal.find("#modalRace--edit-statut-radio--3").prop("checked", true)
+                            break;
+                        case "2":
+                            modal.find("#modalRace--edit-statut-radio--2").prop("checked", true)
+                            break;
+                        case "false":
+                            modal.find("#modalRace--edit-statut-radio--1").prop("checked", true)
+                            break;
+                    }
+                }
+            })
+
+            window.actionEvents = {
+                'click .btn-remove': function (e, value, row, index) {
+                    console.log("delete : "+row["id"]);
+                    
+                    const modal = $('#modalRace--delete')
+                        modal.modal('show')
+                        modal.find(".formControlId").val(row["id"])
+
+                        modal.find("#modalRace--delete-id").val(row["id"])
+                        modal.find("#modalRace--delete-name").val(row["name"])
+                        modal.find("#modalRace--delete-type").val(row["type"])
+                        modal.find("#modalRace--delete-extent").val(row["extent"])
+                        modal.find("#modalRace--delete-terrain").val(row["terrain"])
+                        modal.find("#modalRace--delete-date").val(moment.unix(row["date"]).format("YYYY-MM-DD"))
+                        modal.find("#modalRace--delete-time").val(moment(row["time"], 'HH:mm').format("HH:mm"))
+                },
+                'click .btn-edit': function (e, value, row, index) {
+                    console.log("Edit : "+row["id"]);
+                    
+                    const modal = $('#modalRace--edit')
+                        modal.modal('show')
+                        modal.find(".formControlId").val(row["id"])
+
+                        modal.find("#modalRace--edit-id").val(row["id"])
+                        modal.find("#modalRace--edit-name").val(row["name"])
+                        modal.find("#modalRace--edit-type").val(row["type"])
+                        modal.find("#modalRace--edit-extent").val(row["extent"])
+                        modal.find("#modalRace--edit-terrain").val(row["terrain"])
+                        modal.find("#modalRace--edit-date").val(moment.unix(row["date"]).format("YYYY-MM-DD"))
+                        modal.find("#modalRace--edit-time").val(moment(row["time"], 'HH:mm').format("HH:mm"))
+
+                        modal.find("#modalRace--edit-footer-id").val(row["id"])
+                        modal.find("#modalRace--edit-footer-name").val(row["name"])
+                        modal.find("#modalRace--edit-footer-date").val(moment.unix(row["date"]).format("YYYY-MM-DD"))
+                        modal.find("#modalRace--edit-footer-time").val(moment(row["time"], 'HH:mm').format("HH:mm"))
+
+                        switch (row["isEnd"]) {
+                            case "true":
+                                modal.find("#modalRace--edit-radio--3").prop("checked", true)
+                                break;
+                            case "2":
+                                modal.find("#modalRace--edit-radio--2").prop("checked", true)
+                                break;
+                            case "false":
+                                modal.find("#modalRace--edit-radio--1").prop("checked", true)
+                                break;
+                        }
+                },
+                'click .btn-runner': function (e, value, row, index) {
+                    console.log("Edit Runner : "+row["id"]);
+                    
+                    const modal = $('#modalRace--edit-runner')
+                        modal.modal('show')
+                        modal.find(".formControlId").val(row["id"])
+
+                        modal.find("#modalRace--edit-runner-footer-id").val(row["id"])
+                        modal.find("#modalRace--edit-runner-footer-name").val(row["name"])
+                        modal.find("#modalRace--edit-runner-footer-date").val(moment.unix(row["date"]).format("YYYY-MM-DD"))
+                        modal.find("#modalRace--edit-runner-footer-time").val(moment(row["time"], 'HH:mm').format("HH:mm"))
+
+                    var send = $.ajax({
+                        method: 'POST',
+                        url:'/horse/raceManagement',
+                        data: {
+                            autofunc: true,
+                            action: 'getlistrunner',
+                            id: row["id"]
+                        }
+                    }).done((_return) => {
+                        console.log(_return, _return.dataGrid.length)
+
+                        for (let i = 0; i < _return.dataGrid.length; i++) {
+                            console.log(_return.dataGrid[i].name, _return.dataGrid[i].numero)
+                            var clone = $("#rowOfRunnerTemplate").clone()
+                            // clone.find(".modalRace--edit-runner-numero")
+                            clone.show()
+                            clone.find(".modalRace--edit-runner-numero").val(_return.dataGrid[i].numero)
+                            clone.find(".modalRace--edit-runner-name").val(_return.dataGrid[i].name)
+                            clone.find(".modalRace--edit-runner-quote").val(_return.dataGrid[i].quote)
+                            clone.find(".modalRace--edit-runner-position").val(_return.dataVictory.podium[i].position)
+                            clone.appendTo(".colOfRunner")
+                        }
+
+                        
+                    })
+
+                }
+            }
+
+            btnAddRunner = () => {
+                var clone = $("#rowOfRunnerTemplate").clone()
+                    clone.show()
+                    clone.find(".modalRace--edit-runner-numero")
+                    clone.find(".modalRace--edit-runner-name")
+                    clone.find(".modalRace--edit-runner-quote")
+                    clone.find(".modalRace--edit-runner-position")
+                    clone.appendTo(".colOfRunner")
+            }
+
+            toRaceAdd = () => {
+                const modal = $('#modalRace--add')
+
+                var send = $.ajax({
+                    method: 'POST',
+                    url:'/horse/raceManagement',
+                    data: {
+                        autofunc: false,
+                        action: 'race-add',
+                        id: modal.find("#modalRace--add-id").val(),
+                        checked: modal.find(".form-check-input:checked").val(),
+                        name: modal.find("#modalRace--add-name").val(),
+                        type: modal.find("#modalRace--add-type").val(),
+                        extent: modal.find("#modalRace--add-extent").val(),
+                        terrain: modal.find("#modalRace--add-terrain").val(),
+                        date: moment(modal.find("#modalRace--add-date").val()).unix(),
+                        time: moment(modal.find("#modalRace--add-time").val(), 'HH:mm').format("HH[h]mm")
+                    }
+                }).done((_return) => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'La course a été ajouter'
+                    })
+                    $('#table').bootstrapTable('refresh');
+                    modal.modal('hide')
+                }).fail((err) => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Impossible d\'ajouter la course'
+                    })
+                    console.log("Une erreur s'est produite lors de l'execution de la tache. Contacter le support.", err);
+                })
+
+                return true;
+            }
+
+            toRaceEdit = () => {
+                const modal = $('#modalRace--edit')
+
+                var send = $.ajax({
+                    method: 'POST',
+                    url:'/horse/raceManagement',
+                    data: {
+                        autofunc: false,
+                        action: 'race-edit',
+                        id: modal.find(".formControlId").val(),
+                        checked: modal.find(".form-check-input:checked").val(),
+                        name: modal.find("#modalRace--edit-name").val(),
+                        type: modal.find("#modalRace--edit-type").val(),
+                        extent: modal.find("#modalRace--edit-extent").val(),
+                        terrain: modal.find("#modalRace--edit-terrain").val(),
+                        date: moment(modal.find("#modalRace--edit-date").val()).unix(),
+                        time: moment(modal.find("#modalRace--edit-time").val(), 'HH:mm').format("HH[h]mm")
+                    }
+                }).done((_return) => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'La course a été modifier'
+                    })
+                    $('#table').bootstrapTable('refresh');
+                    modal.modal('hide')
+                }).fail((err) => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Impossible de modifier la course'
+                    })
+                    console.log("Une erreur s'est produite lors de l'execution de la tache. Contacter le support.", err);
+                })
+
+                return true;
+            }
+
+            toRaceEditStatut = () => {
+                const modal = $('#modalRace--edit-statut');
+
+                var send = $.ajax({
+                    method: 'POST',
+                    url:'/horse/raceManagement',
+                    data: {
+                        autofunc: false,
+                        action: 'race-edit-statut',
+                        id: modal.find(".formControlId").val(),
+                        value: modal.find(".form-check-input:checked").val()
+                    }
+                }).done((_return) => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Le statut de la course à été mis à jour'
+                    })
+                    $('#table').bootstrapTable('refresh');
+                    modal.modal('hide')
+                }).fail((err) => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Impossible d\'actualisé le status de la course'
+                    })
+                    console.log("Une erreur s'est produite lors de l'execution de la tache. Contacter le support.", err);
+                })
+
+                return true;
+            }
+
+            toRaceDelete = () => {
+                const modal = $('#modalRace--delete');
+
+                var send = $.ajax({
+                    method: 'POST',
+                    url:'/horse/raceManagement',
+                    data: {
+                        autofunc: false,
+                        action: 'race-delete',
+                        id: modal.find(".formControlId").val()
+                    }
+                }).done((_return) => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'La course a été supprimer'
+                    })
+                    $('#table').bootstrapTable('refresh');
+                    modal.modal('hide')
+                }).fail((err) => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Impossible de supprimer la course'
+                    })
+                    console.log("Une erreur s'est produite lors de l'execution de la tache. Contacter le support.", err);
+                })
+
+                return true;
+            }
+
+            postQueryParams = (params) => {
+                params.action = "getlist";
+                return params;
+            }
+
+            actionFormatter = (value, row, index) => {
+                return [
+                    '<button class="btn btn-primary btn-sm btn-edit me-1" title="Modifier"><i class="fas fa-edit"></i></button>',
+                    '<button class="btn btn-primary btn-sm btn-runner me-1" title="Modifier"><i class="fa-solid fa-horse-saddle"></i></button>',
+                    '<button class="btn btn-danger btn-sm btn-remove me-1" title="Supprimer"><i class="fas fa-trash"></i></button>'
+                ].join('');
+            }
+
+            toCheckbox = (value, row, index) => {
+                if (value == "true")
+                    return "✔️";
+                else if (value == "2")
+                    return '<i class="fa-sharp fa-solid fa-rotate fa-spin me-2"></i>';
+                else
+                    return "❌";
+            }
+
+            timestampToDate = (value, row, index) => {
+                return moment.unix(value).format("L");
+            }
+
+            updateCode = () => {
+                $("#edit_code").val(pwdAleatoir());
+            }
+
+            urlparamhistory = ($dateTime) => {
+                history.pushState({}, null, window.location.pathname+"?"+moment($dateTime).unix());
+            }
+        </script>
+
+    </body>
+</html>

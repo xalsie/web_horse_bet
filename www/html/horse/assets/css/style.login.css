@@ -51,25 +51,18 @@ body {
     border-top-right-radius: 0;
 }
 
-.btn-primary {
+.btn-login {
     background: linear-gradient(90deg, #2E5691 0%, rgba(147, 50, 123, 0.7) 62.91%, #D0692D 100%);
     box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.25);
 }
-.btn-primary:hover {
+.btn-login:hover {
     background-color: #d29832;
-    border-color: #d29832;
 }
-.btn-check:active+.btn-primary, .btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle {
+.btn-check:active+.btn-login, .btn-check:checked+.btn-login, .btn-login.active, .btn-login:active, .show>.btn-login.dropdown-toggle {
     background-color: #d29832;
-    border-color: #d29832;
 }
-.btn-check:active+.btn-primary:focus, .btn-check:checked+.btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show>.btn-primary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.25rem rgb(240 174 59 / 50%);
-}
-.btn-check:focus+.btn-primary, .btn-primary:focus {
+.btn-check:focus+.btn-login, .btn-login:focus {
     background-color: #d29832;
-    border-color: #d29832;
-    box-shadow: 0 0 0 0.25rem rgb(240 174 59 / 50%);
 }
 a.d-flex.align-items-center.mb-3.mb-md-0.me-md-auto.text-decoration-none {
     padding: 0 0 10px 0;
@@ -79,19 +72,25 @@ a.d-flex.align-items-center.mb-3.mb-md-0.me-md-auto.text-decoration-none {
     justify-content: center;
     color: gray;
 }
-span.badge.rounded-pill.bg-primary.small {
+span.badge.rounded-pill.bg-login.small {
     font-size: 0.55em !important;
 }
 
-/* .border-gradient {
-    border: 2px solid;
-    border-image-slice: 1;
-    border-width: 2px;
-    text-decoration: inherit;
-    padding: 1rem 2rem;
-    border-radius: 10px;
-} */
-
-/* .border-gradient-purple {
-    border-image-source: linear-gradient(90deg, #2E5691 0%, rgba(147, 50, 123, 0.7) 62.91%, #D0692D 100%);
-} */
+.form-floating>.form-control:focus, .form-floating>.form-control:not(:placeholder-shown) {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.form-floating>.form-control {
+    padding: .75rem;
+    text-align: center;
+    font-size: x-large;
+    text-transform: uppercase;
+    margin: 0 2px;
+}
+div.form-floating {
+    display: flex;
+    margin-bottom: 10px;
+}
+.rounded-6 {
+    border-radius: 1rem;
+}

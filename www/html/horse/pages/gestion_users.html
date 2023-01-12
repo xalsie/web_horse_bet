@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="fr" data-ng-app="appRoot">
+    <head>
+        <title>Horse Racing Bet</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="language" content="French">
+        <meta name="robots" content="index, follow">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+        <meta name="description" content="horse betting in GTA 5 RP">
+        <meta name="keywords" content="horse,bet,betting,rp,gta,five,fivem,gta online,gta server">
+        <meta name="author" content="🐻｜LeGrizzly#0341">
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #  Horse Racing Bet
+
+        #  Developed by    : 🐻｜LeGrizzly#0341
+        #  Design by       : 🐻｜LeGrizzly#0341
+
+        #  Support         : https://discord.gg/yM6XJMBBzV
+         _                _____          _               _
+        | |              / ____|        (_)             | |
+        | |        ___  | |  __   _ __   _   ____  ____ | |  _   _
+        | |       / _ \ | | |_ | | \__| | | |_  / |_  / | | | | | |
+        | |____  |  __/ | |__| | | |    | |  / /   / /  | | | |_| |
+        |______|  \___|  \_____| |_|    |_| /___| /___| |_|  \__, |
+                                                              __/ |
+                                                             |___/
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~_Update: 04/01/2023_~~-->
+
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/horse/assets/css/style.css" rel="stylesheet">
+
+        <!-- Bootstrap core JS -->
+        <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+
+        <!-- MomentJS Script-->
+        <script type="application/javascript" src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+        <script type="application/javascript">moment.locale("fr");</script>
+
+        <!-- AngularJS Core -->
+        <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+        <!-- jQuery JS Core-->
+        <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <!-- jQuery JS UI Core -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <!-- SweetAlert2 -->
+        <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.5/dist/sweetalert2.all.min.js"></script>
+
+        <!-- Bootstrap Table CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+
+        <!-- Bootstrap Table JS -->
+        <script type="application/javascript" src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+
+        <!-- Bootstrap Icons CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+
+        <!-- Bootstrap datepicker JS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js" referrerpolicy="no-referrer" charset="UTF-8"></script>
+
+        <!-- Custom styles for this template-->
+        <script type="application/javascript" src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+
+        <!-- AngularJS Script-->
+        <script type="application/javascript" src="/horse/assets/js/app-angular.js"></script>
+
+        <script>
+          // var socket = io();
+
+          // socket.on('announcements', function(data) {
+          //   console.log('Got announcement:', data.message);
+          //   console.log(data);
+          // });
+        </script>
+
+        <style>
+
+        </style>
+    </head>
+
+    <body id="page-top" class="bg-dark">
+        <!-- Page Wrapper -->
+        <div id="wrapper" data-ng-controller="appCommon">
+
+            <header class="px-3 py-2" style="background-color: #191919;">
+                <div class="container">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between">
+                    <a href="/horse" class="d-flex align-items-center text-white text-decoration-none">
+                      <i class="fa-regular fa-horse"></i>
+                      <strong><span class="fs-5 p-2 h6">Horse Racing Bet</span></strong>
+                    </a>
+    
+                    <div class="d-flex align-items-center">
+                      <div class="dropdown">
+                        <a href="#" class="d-flex link-dark text-decoration-none align-items-center justify-content-center avatar-logo" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li data-ng-if="session.grade>=4"><a class="dropdown-item" href="/horse/raceManagement">Gestion des Courses</a></li>
+                            <li data-ng-if="session.grade>=4"><a class="dropdown-item" href="/horse/userManagement">Gestion des Utilisateurs</a></li>
+                            <li data-ng-if="session.grade>=4"><a class="dropdown-item" href="#">Paramètres</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </header>
+            <!-- Nav bar START -->
+
+            <!-- Nav bar END -->
+
+            <div class="container-fluid mt-5 text-white">
+              <div class="row justify-content-between align-items-baseline pt-3 pb-3">
+                <div class="col mb-2 text-light" data-ng-show="session.grade >= 4">
+                    <div id="toolbar">
+                        <button id="btn-add" class="btn btn-secondary">➕｜Ajouter un utilisateur</button>
+                    </div>
+                    <table class="table table-dark table-sm caption-top table-responsive table-hover text-light position-relative" style="z-index: 1;"
+                        id="table"
+                        data-toolbar="#toolbar"
+                        data-search="true"
+                        data-show-refresh="true"
+                        data-show-columns="true"
+                        data-show-columns-toggle-all="true"
+                        data-show-export="true"
+                        data-detail-formatter="detailFormatter"
+                        data-minimum-count-columns="2"
+                        data-show-pagination-switch="true"
+                        data-pagination="true"
+                        data-id-field="id"
+
+                        data-group-by="true"
+                        data-group-by-field="name_group"
+
+                        data-page-list="[10, 25, 50, 100, all]"
+                        data-side-pagination="server"
+                        data-url="/horse/userManagement"
+                        data-method="post"
+                        data-query-params="postQueryParams"
+                        data-content-type="application/x-www-form-urlencoded">
+                        <thead>
+                            <tr>
+                                <th data-field="id" data-width="100" data-sortable="true" data-halign="center">Id</th>
+                                <th data-field="date_create" data-width="100" data-sortable="true" data-halign="center" data-visible="false">date_create</th>
+                                <th data-field="date_create" data-width="100" data-sortable="true" data-halign="center" data-visible="false">date_create</th>
+                                <th data-field="modif_id" data-width="100" data-sortable="true" data-halign="center" data-visible="false">modif_id</th>
+                                <th data-field="firstname" data-width="100" data-sortable="true" data-halign="center">firstname</th>
+                                <th data-field="lastname" data-width="100" data-sortable="true" data-halign="center">lastname</th>
+                                <th data-field="pseudo" data-width="100" data-sortable="true" data-halign="center">pseudo</th>
+                                <th data-field="group" data-width="100" data-sortable="true" data-halign="center">group</th>
+                                <th data-field="pwd" data-width="100" data-sortable="true" data-halign="center">Code</th>
+                                <th data-field="permission" data-width="100" data-sortable="true" data-halign="center" data-formatter="toCheckbox">Permission</th>
+    
+                                <th data-field="action" data-width="150" data-halign="center" data-align="center" data-formatter="actionFormatter" data-events="actionEvents">Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Wrapper -->
+            <!-- <div class="flex-column p-5 container-fluid" data-ng-cloak style="overflow: overlay;">
+
+            </div> -->
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <script>
+            $(() => {
+                console.log("init js");
+  
+                initTable();
+            })
+
+            function initTable() {
+                var $table = $('#table');
+
+                $table.bootstrapTable('destroy').bootstrapTable({
+                    // height: 550,
+                    locale: "fr-FR"
+                })
+            }
+
+            function postQueryParams(params) {
+                params.action = "getlist";
+                return params;
+            }
+
+                  function actionFormatter(value, row, index) {
+                      return [
+                          '<button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>',
+                          '<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash"></span></button>'
+                      ].join('');
+                  }
+
+                  function toCheckbox(value, row, index) {
+                      if (value == "true")
+                          return "✔️";
+                      else
+                          return "❌";
+                  }
+
+                  window.actionEvents = {
+                          'click .btn-remove': function (e, value, row, index) {
+                          // console.log("Remove : "+row["login"]);
+                          console.log(row);
+                          ShowDeleteUser(row);
+                          },'click .btn-edit': function (e, value, row, index) {
+                          console.log("Edit : "+row["id"]);
+                          ShowEditUser(row);
+                      }
+                  };
+
+                  function ShowDeleteUser(row) {
+                      Swal.fire({
+                          title: "Supprimer un utilisateur",
+                          html:	'Etes-vous sûr de vouloir supprimer l\'utilisateur "'+row["name"]+'" ?',
+                          width: '600px',
+                          allowEscapeKey:true,
+                          allowOutsideClick: false,
+                          showCancelButton: true,
+                          buttonsStyling:false,
+                          confirmButtonText: "Oui, je veux le supprimer",
+                          cancelButtonText: "Non",
+                          confirmButtonClass: "btn btn-warning",
+                          cancelButtonClass: "btn btn-secondary",
+                          showLoaderOnConfirm: false,
+                          focusCancel:true,
+                          preConfirm: function() {
+                              return new Promise(function(resolve) {
+                                  const Toast = Swal.mixin({
+                                      toast: true,
+                                      position: 'top-end',
+                                      showConfirmButton: false,
+                                      timer: 3000,
+                                      timerProgressBar: true,
+                                      didOpen: (toast) => {
+                                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                      }
+                                  })
+
+                                  var send=$.ajax({
+                                      method: 'POST',
+                                      url:urlApp+'/userManagement',
+                                      data: {
+                                          autofunc:true,
+                                          action:'deleteuser',
+                                          id: row["id"],
+                                      }
+                                  }).done(function(html){
+                                      if(html != 'OK') {
+                                          Swal.showValidationMessage(html);
+                                          Swal.disableLoading();
+                                      } else {
+                                          Swal.close();
+                                          Toast.fire({
+                                              icon: 'success',
+                                              title: 'Supprimé avec succès'
+                                          })
+                                          $('#table').bootstrapTable('refresh');
+                                      }
+                                  }).fail(function(){
+                                      Swal.fire('Erreur','Une erreur s\'est produite lors de la suppression du collaborateur !','error');
+                                  });
+                              });
+                          }
+                      });
+                  }
+
+                  $("#btn-add").click(function () {
+                      ShowAddUser();
+                  });
+
+                  $('#table').on('dbl-click-row.bs.table', function (e, row, element, field) {
+                      ShowEditUser(row);
+                  });
+
+                  function ShowAddUser() {
+                      list_groupe = '';
+
+                      Swal.fire({
+                          title: "Ajouter un utilisateur",
+                          html:	'<form class="needs-validation" novalidate="">'+
+                                  '    <div class="row">'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="add_fname">Fisrt name :</label>'+
+                                  '           <input type="text" class="form-control" id="add_fname" placeholder="Firstname" value required>'+
+                                  '       </div>'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="add_pseudo">Pseudo :</label>'+
+                                  '           <input type="text" class="form-control" id="add_pseudo" placeholder="Pseudo" value required>'+
+                                  '       </div>'+
+                                  '    </div>'+
+                                  '    <div class="row">'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="add_lname">Last name :</label>'+
+                                  '           <input type="text" class="form-control" id="add_lname" placeholder="Lastname" value required>'+
+                                  '       </div>'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="add_group">Groupe :</label>'+
+                                  '           <input type="text" class="form-control" id="add_group" placeholder="Groupe" value required>'+
+                                  '       </div>'+
+                                  '    </div>'+
+                                  '    <div class="row align-items-center">'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="add_grade">Grade :</label>'+
+                                  '            <select class="form-select" id="add_grade" aria-label="Default select example">'+
+                                  '                <option selected value="0">-- Grade --</option>'+
+                                  '                <option value="1">Invité</option>'+
+                                  '                <option value="2">Croyants</option>'+
+                                  '                <option value="3">Staff</option>'+
+                                  '                <option value="4">Admin</option>'+
+                                  '            </select>'+
+                                  '       </div>'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="add_code">Code :</label>'+
+                                  '             <div class="input-group">'+
+                                  '              <input type="text" class="form-control" id="add_code" placeholder="00100" minlength="5" maxlength="5" value="'+pwdAleatoir()+'" required>'+
+                                  '              <button class="btn btn-outline-secondary" type="button" onclick="updateCode()" id="button-addon2">Generate</button>'+
+                                  '           </div>'+
+                                  '       </div>'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <div class="form-check form-switch" style="padding-top: 26px;">'+
+                                  '               <input class="form-check-input" type="checkbox" id="add_check_admin">'+
+                                  '           <label class="form-check-label" for="add_check_admin">Autorisé la modification</label></div>'+
+                                  '       </div>'+
+                                  '    </div>'+
+                                  '    <hr class="mb-4">'+
+                                  '</form>',
+                          width: '600px',
+                          allowEscapeKey:true,
+                          allowOutsideClick: false,
+                          showCancelButton: true,
+                          buttonsStyling:false,
+                          confirmButtonText: "Ajouter l'utilisateur",
+                          cancelButtonText: "Annuler",
+                          confirmButtonClass: "btn btn-success",
+                          cancelButtonClass: "btn btn-default",
+                          showLoaderOnConfirm: false,
+                          preConfirm: () => {
+                              return new Promise(function(resolve) {
+                                  const Toast = Swal.mixin({
+                                      toast: true,
+                                      position: 'top-end',
+                                      showConfirmButton: false,
+                                      timer: 3000,
+                                      timerProgressBar: true,
+                                      didOpen: (toast) => {
+                                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                      }
+                                  })
+
+                                  var send=$.ajax({
+                                      method: 'POST',
+                                      url: urlApp+'/userManagement',
+                                      data: {
+                                          autofunc: true,
+                                          action: 'addUser',
+                                          firstname: $("#add_fname").val(),
+                                          lastname: $("#add_lname").val(),
+                                          pseudo: $("#add_pseudo").val(),
+                                          group: $("#add_group").val(),
+                                          grade: $("#add_grade").val(),
+                                          pwd: $("#add_code").val(),
+                                          permission: $("#add_check_admin").is(":checked")
+                                      }
+                                  }).done(function(html){
+                                      if(html != 'OK') {
+                                          Swal.showValidationMessage(html);
+                                          Swal.disableLoading();
+                                      } else {
+                                          Swal.close();
+                                          Toast.fire({
+                                              icon: 'success',
+                                              title: 'Ajouté avec succès'
+                                          })
+                                          $('#table').bootstrapTable('refresh');
+                                      }
+                                  }).fail(function(){
+                                      Swal.fire('Erreur','Une erreur s\'est produite lors de l\'enregistrement du collaborateur !','error');
+                                  });
+                              });
+                          }
+                      });
+                      $('#add_fname').focus();
+                  }
+
+                  function ShowEditUser(row) {
+                      list_groupe = '';
+
+                      Swal.fire({
+                          title: "Modifier un utilisateur",
+                          html:	'<form class="needs-validation" novalidate>'+
+                                  '    <hr class="mb-4">'+
+                                  '    <div class="row">'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="edit_fname">Fisrt name :</label>'+
+                                  '           <input type="text" class="form-control" id="edit_fname" placeholder="Firstname" value="'+row["firstname"]+'" required>'+
+                                  '       </div>'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="swal_edit_pseudo">Pseudo :</label>'+
+                                  '           <input type="text" class="form-control" id="swal_edit_pseudo" placeholder="Pseudo" value="'+row["pseudo"]+'" required>'+
+                                  '       </div>'+
+                                  '    </div>'+
+                                  '    <div class="row">'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="edit_lname">Last name :</label>'+
+                                  '           <input type="text" class="form-control" id="edit_lname" placeholder="Lastname" value="'+row["lastname"]+'" required>'+
+                                  '       </div>'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="edit_group">Groupe :</label>'+
+                                  '           <input type="text" class="form-control" id="edit_group" placeholder="Groupe" value="'+row["group"]+'" required>'+
+                                  '       </div>'+
+                                  '    </div>'+
+                                  '    <div class="row align-items-center">'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="edit_grade">Grade :</label>'+
+                                  '            <select class="form-select" id="edit_grade" aria-label="Grade of user">'+
+                                  '                <option selected value="0">-- Grade --</option>'+
+                                  '                <option value="1">Invité</option>'+
+                                  '                <option value="2">Croyants</option>'+
+                                  '                <option value="3">Staff</option>'+
+                                  '                <option value="4">Admin</option>'+
+                                  '            </select>'+
+                                  '       </div>'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="edit_code">Code :</label>'+
+                                  '             <div class="input-group">'+
+                                  '              <input type="text" class="form-control" id="edit_code" placeholder="00100" minlength="5" maxlength="5" value="'+row["pwd"]+'" required>'+
+                                  '              <button class="btn btn-outline-secondary" type="button" onclick="updateCode()" id="button-addon2">Generate</button>'+
+                                  '           </div>'+
+                                  '       </div>'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <div class="form-check form-switch" style="padding-top: 26px;">'+
+                                  '               <input class="form-check-input" type="checkbox" '+((row["permission"] == "true")? "checked":"")+' id="edit_check_admin">'+
+                                  '           <label class="form-check-label" for="edit_check_admin">Autorisé la modification</label></div>'+
+                                  '       </div>'+
+                                  '    </div>'+
+                                  '    <hr class="mb-4">'+
+                                  '    <div class="row">'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="date_create">Date de création du compte :</label>'+
+                                  '           <input type="text" class="form-control" id="date_create" placeholder="" value="'+moment.unix(row["date_create"]).format("lll")+'" readonly>'+
+                                  '       </div>'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="date_modification">Date de mise a jour :</label>'+
+                                  '           <input type="text" class="form-control" id="date_modification" placeholder="" value="'+moment.unix(row["date_modif"]).format("lll")+'" readonly>'+
+                                  '       </div>'+
+                                  '    </div>'+
+                                  '    <div class="row justify-content-center">'+
+                                  '       <div class="col-md-6 mb-3">'+
+                                  '           <label for="edit_by">Modifier par :</label>'+
+                                  '           <input type="text" class="form-control" id="edit_by" placeholder="" value="'+row["modif_id"]+'" readonly>'+
+                                  '       </div>'+
+                                  '    </div>'+
+                                  '    <hr class="mb-4">'+
+                                  '</form>',
+                              width: '600px',
+                              allowEscapeKey:true,
+                              allowOutsideClick: false,
+                              showCancelButton: true,
+                              buttonsStyling: false,
+                              confirmButtonText: "Enregistrer",
+                              cancelButtonText: "Annuler",
+                              confirmButtonClass: "btn btn-success",
+                              cancelButtonClass: "btn btn-danger",
+                              showLoaderOnConfirm: false,
+                              preConfirm: () => {
+                                  return new Promise(function(resolve) {
+                                      if ($("#edit_grade").val() == '0') {
+                                          $("#edit_grade").addClass("border-danger");
+                                          Swal.showValidationMessage("Ancun Grade selectionner !");
+                                          Swal.disableLoading();
+                                          return;
+                                      }
+
+                                      const Toast = Swal.mixin({
+                                          toast: true,
+                                          position: 'top-end',
+                                          showConfirmButton: false,
+                                          timer: 3000,
+                                          timerProgressBar: true,
+                                          didOpen: (toast) => {
+                                              toast.addEventListener('mouseenter', Swal.stopTimer)
+                                              toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                          }
+                                      })
+
+                                      var send=$.ajax({
+                                          method: 'POST',
+                                          url: urlApp+'/userManagement',
+                                          data: {
+                                              autofunc: true,
+                                              action: 'edituser',
+                                              id: row["id"],
+                                              firstname: $("#edit_fname").val(),
+                                              lastname: $("#edit_lname").val(),
+                                              pseudo: $("#swal_edit_pseudo").val(),
+                                              group: $("#edit_group").val(),
+                                              grade: $("#edit_grade").val(),
+                                              pwd: $("#edit_code").val(),
+                                              permission: $("#edit_check_admin").is(":checked")
+                                          }
+                                      }).done(function(html){
+                                          if(html != 'OK') {
+                                              Swal.showValidationMessage(html);
+                                              Swal.disableLoading();
+                                          } else {
+                                              Swal.close();
+                                              Toast.fire({
+                                                  icon: 'success',
+                                                  title: 'Modifié avec succès'
+                                              })
+                                              $('#table').bootstrapTable('refresh');
+                                          }
+                                      }).fail(function(){
+                                          Swal.fire('Erreur','Une erreur s\'est produite lors de l\'enregistrement du collaborateur !','error');
+                                      });
+                                  });
+                              }
+                      });
+                      $('#edit_name_group').focus();
+
+                      $("#edit_grade").click(() => {
+                          $("#edit_grade").removeClass("border-danger");
+                      })
+
+                      $("#edit_grade").val(row["grade"]);
+                  }
+
+                  function pwdAleatoir() {
+                      String.prototype.shuffle = function() {
+                          var parts = this.split('');
+                          for (var i = 0, len = parts.length; i < len; i++) {
+                              var j = Math.floor( Math.random() * ( i + 1 ) );
+                              var temp = parts[i];
+                              parts[i] = parts[j];
+                              parts[j] = temp;
+                          }
+                          return parts.join('');
+                      };
+
+                      return '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.shuffle().substr(1, 5);
+                  }
+
+                  function updateCode() {
+                    $("#edit_code").val(pwdAleatoir());
+                  }
+
+                  function btnSidebarOpen() {
+                    document.getElementById("sidebar").style.left = "0";
+                  }
+
+                  function btnSidebarClose() {
+                    document.getElementById("sidebar").style.left = "-280px";
+                  }
+
+                function urlparamhistory($dateTime) {
+                  history.pushState({}, null, window.location.pathname+"?"+moment($dateTime).unix());
+                }
+
+        </script>
+
+        <!-- Custom scripts for all pages-->
+
+    </body>
+</html>
